@@ -11,15 +11,22 @@ class Block:
         self.row_offset = 0
         self.column_offset = 0
 
-    def get_position(self):
+    def get_positions(self):
         return [(cell[0]+self.row_offset, cell[1]+self.column_offset) for cell in self.cells[self.rotation_state]]
+
+    def get_positions_if_rotated(self):
+        return [(cell[0]+self.row_offset, cell[1]+self.column_offset) for cell in self.cells[(self.rotation_state+1) % 4]]
 
     def move(self, offset):
         self.row_offset += offset[0]
         self.column_offset += offset[1]
 
+    def rotate(self):
+        self.rotation_state += 1
+        self.rotation_state %= 4
+
     def draw(self, screen):
-        for tile in self.get_position():
+        for tile in self.get_positions():
             tile_rect = pygame.Rect(
                 tile[1]*self.cell_size+1, tile[0]*self.cell_size+1, self.cell_size-1, self.cell_size-1)
             pygame.draw.rect(screen, Colors.colors[self.id], tile_rect)

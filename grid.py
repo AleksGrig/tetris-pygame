@@ -10,8 +10,7 @@ class Grid:
         self.grid = [[0 for i in range(self.num_cols)]
                      for j in range(self.num_rows)]
 
-    def is_inside(self, block, offset):
-        positions = block.get_position()
+    def is_inside(self, positions, offset):
         for position in positions:
             if ((position[0]+offset[0] < 0) or
                 (position[0]+offset[0] >= self.num_rows) or

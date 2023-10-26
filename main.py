@@ -25,6 +25,8 @@ while True:
                 game.move((0, 1))
             elif event.key == pygame.K_DOWN:
                 game.move((1, 0))
+            elif event.key == pygame.K_UP:
+                game.rotate()
 
     # drawing
     screen.fill(Colors.dark_blue)
