@@ -13,6 +13,9 @@ class Game:
         self.grid.draw(screen)
         self.current_block.draw(screen)
 
+    def move(self, offset):
+        self.current_block.move(offset)
+
     def get_random_block(self):
         if not self.blocks:
             self.blocks = [IBlock(), JBlock(), LBlock(),
