@@ -10,6 +10,16 @@ class Grid:
         self.grid = [[0 for i in range(self.num_cols)]
                      for j in range(self.num_rows)]
 
+    def is_inside(self, block, offset):
+        positions = block.get_position()
+        for position in positions:
+            if ((position[0]+offset[0] < 0) or
+                (position[0]+offset[0] >= self.num_rows) or
+                (position[1]+offset[1] < 0) or
+                    (position[1]+offset[1] >= self.num_cols)):
+                return False
+        return True
+
     def draw(self, screen):
         for row in range(self.num_rows):
             for column in range(self.num_cols):

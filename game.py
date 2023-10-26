@@ -14,7 +14,8 @@ class Game:
         self.current_block.draw(screen)
 
     def move(self, offset):
-        self.current_block.move(offset)
+        if self.grid.is_inside(self.current_block, offset):
+            self.current_block.move(offset)
 
     def get_random_block(self):
         if not self.blocks:
