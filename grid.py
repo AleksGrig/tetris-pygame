@@ -10,12 +10,14 @@ class Grid:
         self.grid = [[0 for i in range(self.num_cols)]
                      for j in range(self.num_rows)]
 
-    def is_inside(self, positions, offset):
+    def no_collision(self, block, offset=(0, 0), rotation=0):
+        positions = block.get_positions(rotation=rotation)
         for position in positions:
-            if ((position[0]+offset[0] < 0) or
-                (position[0]+offset[0] >= self.num_rows) or
-                (position[1]+offset[1] < 0) or
-                    (position[1]+offset[1] >= self.num_cols)):
+            row = position[0]+offset[0]
+            column = position[1]+offset[1]
+            if ((row < 0) or (row >= self.num_rows) or
+                (column < 0) or (column >= self.num_cols) or
+                    self.grid[row][column]):
                 return False
         return True
 

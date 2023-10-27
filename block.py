@@ -10,12 +10,10 @@ class Block:
         self.rotation_state = 0
         self.row_offset = 0
         self.column_offset = 0
+        self.move((0, 3))
 
-    def get_positions(self):
-        return [(cell[0]+self.row_offset, cell[1]+self.column_offset) for cell in self.cells[self.rotation_state]]
-
-    def get_positions_if_rotated(self):
-        return [(cell[0]+self.row_offset, cell[1]+self.column_offset) for cell in self.cells[(self.rotation_state+1) % 4]]
+    def get_positions(self, rotation=0):
+        return [(cell[0]+self.row_offset, cell[1]+self.column_offset) for cell in self.cells[(self.rotation_state+rotation) % 4]]
 
     def move(self, offset):
         self.row_offset += offset[0]

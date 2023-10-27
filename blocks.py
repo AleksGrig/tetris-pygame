@@ -32,6 +32,7 @@ class IBlock(Block):
             [(2, 0), (2, 1), (2, 2), (2, 3)],
             [(0, 1), (1, 1), (2, 1), (3, 1)],
         ]
+        self.move((-1, 0))
 
 
 class OBlock(Block):
@@ -43,6 +44,7 @@ class OBlock(Block):
             [(0, 0), (0, 1), (1, 0), (1, 1)],
             [(0, 0), (0, 1), (1, 0), (1, 1)],
         ]
+        self.move((0, 1))
 
 
 class SBlock(Block):
