@@ -10,6 +10,31 @@ class Grid:
         self.grid = [[0 for i in range(self.num_cols)]
                      for j in range(self.num_rows)]
 
+    def is_row_full(self, row):
+        for column in range(self.num_cols):
+            if not self.grid[row][column]:
+                return False
+        return True
+
+    def clear_row(self, row):
+        for column in range(self.num_cols):
+            self.grid[row][column] = 0
+
+    def move_row_down(self, row, offset):
+        for column in range(self.num_cols):
+            self.grid[row+offset][column] = self.grid[row][column]
+            self.grid[row][column] = 0
+
+    def clear_rows(self):
+        completed = 0
+        for row in range(self.num_rows-1, 0, -1):
+            if self.is_row_full(row):
+                self.clear_row(row)
+                completed += 1
+            elif completed:
+                self.move_row_down(row, completed)
+        return completed
+
     def no_collision(self, block, offset=(0, 0), rotation=0):
         positions = block.get_positions(rotation=rotation)
         for position in positions:

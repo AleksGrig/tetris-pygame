@@ -31,6 +31,7 @@ class Game:
             self.grid.grid[position[0]][position[1]] = self.current_block.id
         self.current_block = self.next_block
         self.next_block = self.get_random_block()
+        self.grid.clear_rows()
 
     def get_random_block(self):
         if not self.blocks:
