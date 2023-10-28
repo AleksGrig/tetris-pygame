@@ -9,6 +9,7 @@ class Game:
         self.blocks = []
         self.current_block = self.get_random_block()
         self.next_block = self.get_random_block()
+        self.game_over = False
 
     def draw(self, screen):
         self.grid.draw(screen)
@@ -32,6 +33,15 @@ class Game:
         self.current_block = self.next_block
         self.next_block = self.get_random_block()
         self.grid.clear_rows()
+        if not self.grid.no_collision(self.current_block):
+            self.game_over = True
+
+    def reset(self):
+        self.game_over = False
+        self.grid.reset()
+        self.blocks = []
+        self.current_block = self.get_random_block()
+        self.next_block = self.get_random_block()
 
     def get_random_block(self):
         if not self.blocks:

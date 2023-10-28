@@ -14,7 +14,7 @@ clock = pygame.time.Clock()
 game = Game()
 
 GAME_UPDATE = pygame.USEREVENT
-pygame.time.set_timer(GAME_UPDATE, 300)
+pygame.time.set_timer(GAME_UPDATE, 200)
 # KEY_PRESSED = pygame.USEREVENT
 # pygame.time.set_timer(KEY_PRESSED, 1000)
 
@@ -23,17 +23,20 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        if event.type == GAME_UPDATE:
+        if event.type == GAME_UPDATE and not game.game_over:
             game.move((1, 0))
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                game.move((0, -1))
-            elif event.key == pygame.K_RIGHT:
-                game.move((0, 1))
-            elif event.key == pygame.K_DOWN:
-                game.move((1, 0))
-            if event.key == pygame.K_UP:
-                game.rotate()
+            if game.game_over:
+                game.reset()
+            else:
+                if event.key == pygame.K_LEFT:
+                    game.move((0, -1))
+                elif event.key == pygame.K_RIGHT:
+                    game.move((0, 1))
+                elif event.key == pygame.K_DOWN:
+                    game.move((1, 0))
+                elif event.key == pygame.K_UP:
+                    game.rotate()
         # elif event.type == KEY_PRESSED:
         #     keys = pygame.key.get_pressed()
         #     if keys[pygame.K_LEFT]:

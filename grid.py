@@ -10,6 +10,11 @@ class Grid:
         self.grid = [[0 for i in range(self.num_cols)]
                      for j in range(self.num_rows)]
 
+    def reset(self):
+        for row in range(self.num_rows):
+            for column in range(self.num_cols):
+                self.grid[row][column] = 0
+
     def is_row_full(self, row):
         for column in range(self.num_cols):
             if not self.grid[row][column]:
