@@ -1,3 +1,4 @@
+import pygame
 import random
 from grid import Grid
 from blocks import *
@@ -11,6 +12,8 @@ class Game:
         self.next_block = self.get_random_block()
         self.game_over = False
         self.score = 0
+        self.rotate_sound = pygame.mixer.Sound("sounds/rotate.ogg")
+        self.clear_sound = pygame.mixer.Sound("sounds/clear.ogg")
 
     def draw(self, screen):
         self.grid.draw(screen)
@@ -31,6 +34,7 @@ class Game:
 
     def rotate(self):
         if self.grid.no_collision(self.current_block, rotation=1):
+            self.rotate_sound.play()
             self.current_block.rotate()
 
     def lock_block(self):
@@ -40,7 +44,9 @@ class Game:
         self.current_block = self.next_block
         self.next_block = self.get_random_block()
         rows_cleard = self.grid.clear_rows()
-        self.update_score(lines_cleared=rows_cleard)
+        if rows_cleard:
+            self.clear_sound.play()
+            self.update_score(lines_cleared=rows_cleard)
         if not self.grid.no_collision(self.current_block):
             self.game_over = True
 
