@@ -10,6 +10,7 @@ class Game:
         self.current_block = self.get_random_block()
         self.next_block = self.get_random_block()
         self.game_over = False
+        self.score = 0
 
     def draw(self, screen):
         self.grid.draw(screen)
@@ -32,7 +33,8 @@ class Game:
             self.grid.grid[position[0]][position[1]] = self.current_block.id
         self.current_block = self.next_block
         self.next_block = self.get_random_block()
-        self.grid.clear_rows()
+        rows_cleard = self.grid.clear_rows()
+        self.update_score(lines_cleared=rows_cleard)
         if not self.grid.no_collision(self.current_block):
             self.game_over = True
 
@@ -42,6 +44,18 @@ class Game:
         self.blocks = []
         self.current_block = self.get_random_block()
         self.next_block = self.get_random_block()
+        self.score = 0
+
+    def update_score(self, lines_cleared=0, move_down_points=0):
+        if lines_cleared == 1:
+            self.score += 100
+        elif lines_cleared == 2:
+            self.score += 300
+        elif lines_cleared == 3:
+            self.score += 500
+        elif lines_cleared == 4:
+            self.score += 1000
+        self.score += move_down_points
 
     def get_random_block(self):
         if not self.blocks:
