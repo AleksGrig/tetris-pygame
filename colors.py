@@ -11,3 +11,5 @@ class Colors:
     colors = [dark_grey, green, red, orange, yellow, purple, cyan, blue]
 
     dark_blue = (44, 44, 127)
+    light_blue = (59, 85, 162)
+    white = (255, 255, 255)

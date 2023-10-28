@@ -6,7 +6,15 @@ from game import Game
 
 pygame.init()
 
-screen = pygame.display.set_mode((301, 601))
+title_font = pygame.font.Font(None, 40)
+score_surface = title_font.render("Score", True, Colors.white)
+next_surface = title_font.render("Next", True, Colors.white)
+game_over_surface = title_font.render("GAME OVER", True, Colors.white)
+
+score_rect = pygame.Rect(320, 55, 170, 60)
+next_rect = pygame.Rect(320, 215, 170, 180)
+
+screen = pygame.display.set_mode((500, 620))
 pygame.display.set_caption("Pygame Tetris")
 
 clock = pygame.time.Clock()
@@ -50,6 +58,15 @@ while True:
 
     # drawing
     screen.fill(Colors.dark_blue)
+
+    screen.blit(score_surface, (365, 20, 50, 50))
+    screen.blit(next_surface, (375, 180, 50, 50))
+    if game.game_over:
+        screen.blit(game_over_surface, (320, 450, 50, 50))
+
+    pygame.draw.rect(screen, Colors.light_blue, score_rect, 0, 10)
+    pygame.draw.rect(screen, Colors.light_blue, next_rect, 0, 10)
+
     game.draw(screen)
 
     pygame.display.update()
